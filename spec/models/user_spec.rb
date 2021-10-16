@@ -29,7 +29,24 @@ RSpec.describe User, type: :model do
   end
 
   # メールアドレスがなければ無効な状態であること
-  it "is invalid without an email address"
+  it "is invalid without an email address"do
+    User.create(
+      first_name: "Joe",
+      last_name: "Tester",
+      email: "tester@example.com",
+      password: "dottle-nouveau-pavilion-tights-furze",
+    )
+
+    user = User.new(
+      first_name: "Jane",
+      last_name: "Tester",
+      email: "tester@example.com",
+      password: "dottle-nouveau-pavilion-tights-furze",
+    )
+
+    user.valid?
+    expect(user.errors[:email]).to include("has already been taken")
+  end
 
   # 重複したメールアドレスなら無効な状態であること
   it "is invalid with a duplicate email address"
