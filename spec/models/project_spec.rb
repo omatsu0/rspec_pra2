@@ -11,7 +11,7 @@ RSpec.describe Project, type: :model do
       password: "dottle-nouveau-pavilion-tights-furze",
     )
 
-    user.projets.create(
+    user.projects.create(
       name: "Test Project",
     )
 
@@ -34,7 +34,7 @@ RSpec.describe Project, type: :model do
         password: "dottle-nouveau-pavilion-tights-furze",
       )
   
-      user.projets.create(
+      user.projects.create(
         name: "Test Project",
       )
   
@@ -50,5 +50,6 @@ RSpec.describe Project, type: :model do
       )
   
       expect(other_project).to be_valid
-  end
+
+    end
 end

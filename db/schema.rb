@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 2021_10_29_092357) do
     t.string "name"
     t.text "description"
     t.date "due_on"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -46,4 +48,5 @@ ActiveRecord::Schema.define(version: 2021_10_29_092357) do
 
   add_foreign_key "notes", "projects"
   add_foreign_key "notes", "users"
+  add_foreign_key "projects", "users"
 end
