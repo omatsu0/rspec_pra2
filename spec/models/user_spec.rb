@@ -37,32 +37,15 @@ RSpec.describe User, type: :model do
 
   # 重複したメールアドレスなら無効な状態であること
   it "is invalid with a duplicate email address" do
-    User.create(
-      first_name: "Joe",
-      last_name: "Tester",
-      email: "tester@example.com",
-      password: "dottle-nouveau-pavilion-tights-furze",
-    )
-
-    user = User.new(
-      first_name: "Jane",
-      last_name: "Tester",
-      email: "tester@example.com",
-      password: "dottle-nouveau-pavilion-tights-furze",
-    )
-
+    FactoryBot.create(:user,email: "aaron@example.com")
+    user = FactoryBot.build(:user,email: "aaron@example.com")
     user.valid?
     expect(user.errors[:email]).to include("has already been taken")
   end
 
   # ユーザーのフルネームを文字列として返すこと
   it "returns a user's full name as a string" do
-    user = User.new(
-      first_name: "John",
-      last_name: "Doe",
-      email: "johndoe@example.com",
-    )
-
+    user = FactoryBot.build(:user,first_name: "John",last_name: "Doe")
     expect(user.name).to eq "John Doe"
   end
 
