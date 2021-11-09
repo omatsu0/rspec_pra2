@@ -51,4 +51,18 @@ RSpec.describe Project, type: :model do
   
       expect(other_project).to be_valid
     end
+
+    describe "late status" do
+      #締切日が過ぎていれば遅延していること
+      it "is late when the due is past today" do
+        project = FactoryBot.creatye(:project, :due_today)
+        expect(project).to_not be_late
+      end
+
+      #締切日が未来ならスケジュール通りであること
+      it "is on tim when the due date is in the future" do
+        project = FactoryBot.creatye(:project, :project_due_tomorrow)
+        expect(project).to_not be_late
+      end
+    end
 end
