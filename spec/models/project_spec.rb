@@ -67,7 +67,7 @@ RSpec.describe Project, type: :model do
 
       #たくさんのメモがついていること
       it "can have many notes" do
-        project = FactoryBot.create(:project)
+        project = FactoryBot.create(:project , :with_notes)
         expect(project.notes.length).to eq 5
       end
     end
