@@ -7,6 +7,7 @@ RSpec.describe ProjectsController, type: :controller do
     context "as an authenticated user" do
       before do
         @user = FactoryBot.create(:user)
+        @project = FactoryBot.create(:project, owner: @user)
       end
 
       #正常にレスポンスを返すこと
