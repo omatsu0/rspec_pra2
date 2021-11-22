@@ -7,7 +7,6 @@ RSpec.describe ProjectsController, type: :controller do
     context "as an authenticated user" do
       before do
         @user = FactoryBot.create(:user)
-        @project = FactoryBot.create(:project, owner: @user)
       end
 
       #正常にレスポンスを返すこと
@@ -105,6 +104,24 @@ RSpec.describe ProjectsController, type: :controller do
         post :create, params: { project: project_params }
         expect(response).to redirect_to "/users/sign_in"
       end
+    end
+  end
+
+  describe "#update" do
+    #認可されたユーザとして
+    context "as an authorized user" do
+      before do
+        @user = FactoryBot.create(:user)
+        @project = FactoryBot.create(:project, owner: @user)
+      end
+    end
+
+    #プロジェクトを更新できること
+    it "updates a project" do
+      project_params = FactoryBot.attributes_for(:project,name:"New Project Name")
+      sign_in @user
+      patch :update, params: { id: @project.id, project: project_params }
+      expect(@project.reload.name).to eq "New Project Name"
     end
   end
 end
