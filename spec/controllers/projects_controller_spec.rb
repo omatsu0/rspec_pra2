@@ -172,5 +172,16 @@ RSpec.describe ProjectsController, type: :controller do
         expect(response).to redirect_to "/users/sign_in"
       end
     end
+
+    describe "#destroy" do
+      # 認可されたユーザーとして
+      context "as an authorized user" do
+        before do
+          @user = FactoryBot.create(:user)
+          @project = FactoryBot.create(:project, owner: @user)
+        end
+      end
+
+    end
   end
 end
