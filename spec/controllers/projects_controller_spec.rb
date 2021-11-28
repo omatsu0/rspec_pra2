@@ -181,7 +181,13 @@ RSpec.describe ProjectsController, type: :controller do
           @project = FactoryBot.create(:project, owner: @user)
         end
       end
-
+      # プロジェクトを削除できること
+      it "deletes a project" do
+        sign_in @user
+        expect {
+          delete :destroy, params: { id: @project.id }
+        }.to change(@user.projects, :count).by(-1)
+      end
     end
   end
 end
