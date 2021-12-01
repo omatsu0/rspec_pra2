@@ -189,5 +189,22 @@ RSpec.describe ProjectsController, type: :controller do
         }.to change(@user.projects, :count).by(-1)
       end
     end
+
+    # 認可されていないユーザーとして
+    context "as an unauthorized user" do
+      before do
+        @user = FactoryBot.create(:user)
+        other_user = FactoryBot.create(:user)
+        @project = FactoryBot.create(:project, owner: other_user)
+      end
+    end
+
+    # プロジェクトを削除できないこと
+    it "does not delete the project" do
+      sign_in @user
+      expect {
+        delete :destroy, params: { id: @project.id }
+      }.to_not change(Project, :count)
+    end
   end
 end
