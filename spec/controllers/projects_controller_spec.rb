@@ -78,6 +78,8 @@ RSpec.describe ProjectsController, type: :controller do
       before do
         @user = FactoryBot.create(:user)
       end
+    # 有効な属性値の場合
+    context "with valid attributes" do
 
       #プロジェクトを追加できること
       it "adds a project" do
