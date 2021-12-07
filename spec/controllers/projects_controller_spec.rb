@@ -91,6 +91,18 @@ RSpec.describe ProjectsController, type: :controller do
       end
     end
 
+    # 無効な属性値の場合
+    context "with invalid attributes" do
+      # プロジェクトを追加できないこと
+      it "does not add a project" do
+        project_params = FactoryBot.attributes_for(:project, :invalid)
+        sign_in @user
+        expect {
+          post :create, params: { project: project_params }
+        }.to_not change(@user.projects, :count)
+      end
+    end
+
     #ゲストとして
     context "as a guest" do
       #302レスポンスを返すこと
