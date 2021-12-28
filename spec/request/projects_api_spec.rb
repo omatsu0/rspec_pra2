@@ -36,6 +36,6 @@ RSpec.describe "ProjectsApi", type: :request do
       expect(response).to have_http_status(:success)
       json = JSON.parse(response.body)
       expect(json["name"]).to eq "Second Sample Project"
-
     end
+  end
 end
