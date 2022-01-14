@@ -11,19 +11,42 @@ RSpec.describe Note, type: :model do
       user: user,
       project: project,
     )
-  
-  before do
-    @user = User.create(
-      first_name: "Joe",
-      last_name: "Tester",
-      email: "joetester@example.com",
-      password: "dottle-nouveau-pavilion-tights-furze",
-    )
-    @project = @user.projects.create(
-      name: "Test Project",
-    )
-
+    expect(note).to be_valid
   end
+
+  # メッセージがなければ無効な状態であること
+  it "is invalid without a message" do
+    note = Note.new(message: nil)
+    note.valid?
+    expect(note.errors[:message]).to include("can't be blank")
+  end
+
+  # 文字列に一致するメッセージを検索する
+  describe "search message for a term" do
+    let(:note1) {
+      FactoryBot.create(:note,
+        project: project,
+        user: user,
+        message: "This is the first note.",
+      )
+    }
+
+    let(:note2) {
+      FactoryBot.create(:note,
+        project: project,
+        user: user,
+        message: "This is the second note.",
+      )
+    }
+
+    let(:note3) {
+      FactoryBot.create(:note,
+        project: project,
+        user: user,
+        message: "First, preheat the oven.",
+      )
+    }
+
   it "is valid with a user, project, and message" do
     note = Note.new(
       message: "This is a sample note.",
