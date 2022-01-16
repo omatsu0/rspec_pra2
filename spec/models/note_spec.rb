@@ -60,6 +60,7 @@ RSpec.describe Note, type: :model do
       # 空のコレクションを返すこと
       it "returns an empty collection" do
         expect(Note.search("message")).to be_empty
+        expect(Note.count).to eq 3
       end
     end
   end
