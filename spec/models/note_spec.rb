@@ -59,6 +59,9 @@ RSpec.describe Note, type: :model do
     context "when no match is found" do
       # 空のコレクションを返すこと
       it "returns an empty collection" do
+        note1
+        note2
+        note3
         expect(Note.search("message")).to be_empty
         expect(Note.count).to eq 3
       end
