@@ -1,11 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe TasksController, type: :controller do
-  before do
-    let(:user) = {FactoryBot.create(:user)}
-    let(:project) = {FactoryBot.create(:project, owner: user)}
-    let(:task) = {project.tasks.create!(name: "Test task")}
-  end
+  include_context "project setup"
 
   describe "#show" do
     # JSON 形式でレスポンスを返すこと
