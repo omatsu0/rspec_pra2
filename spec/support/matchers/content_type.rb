@@ -1,10 +1,17 @@
 RSpec::Matchers.define :have_content_type do |expected|
   match do |actual|
-    content_types = {
+    begin
+      actual.content_type == content_type(expected)
+    rescue ArgumentError
+      false
+    end
+  end
+
+  def content_types(type) 
+    types = {
       html: "text/html"
       json: "application/json",
     }
-
-    actual.content_type == content_types[expected.to_sym]
+    types[type.to_sym] || "unknown content type"
   end
 end
