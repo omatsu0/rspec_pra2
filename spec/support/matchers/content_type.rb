@@ -7,6 +7,18 @@ RSpec::Matchers.define :have_content_type do |expected|
     end
   end
 
+  failure_message do |actual|
+    "Expected \"#{content_type(actual.content_type)} " +
+    "(#{actual.content_type})\" to be Content Type " +
+    "\"#{content_type(expected)}\" (#{expected})"
+  end
+
+  failure_message_when_negated do |actual|
+    "Expected \"#{content_type(actual.content_type)} " +
+    "(#{actual.content_type})\" to not be Content Type " +
+    "\"#{content_type(expected)}\" (#{expected})"
+  end
+
   def content_types(type) 
     types = {
       html: "text/html"
