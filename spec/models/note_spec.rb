@@ -74,5 +74,6 @@ RSpec.describe Note, type: :model do
     note = Note.new
     allow(note).to receive(:user).and_return(user)
     expect(note.user_name).to eq "Fake User"
+    expect(note.user.first_name).to eq "Fake"
   end
 end
