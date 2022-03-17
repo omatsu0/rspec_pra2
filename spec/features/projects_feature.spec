@@ -29,4 +29,7 @@ RSpec.feature "Projects", type: :feature do
     save_and_open_page
     click_link "New Project"
   end
+
+  # ユーザーはプロジェクトを完了済みにする
+  scenario "user completes a project"
 end
